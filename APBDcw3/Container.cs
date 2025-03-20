@@ -12,7 +12,7 @@ public abstract class Container
 
     protected double maxLoadWeight { get; set; }
 
-    public void emptyContener()
+    public virtual void emptyContener()
     {
         weightOfLoad = 0;
     }
