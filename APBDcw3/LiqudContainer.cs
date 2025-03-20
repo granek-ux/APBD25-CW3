@@ -3,7 +3,11 @@
 public class LiqudContainer : Container , IHazardNotifer
 {
     private TypeOfLoad typeOfLoad;
-    
+
+    public LiqudContainer() : base("L")
+    {
+    }
+
     public override void LoadContener(int weight)
     {
         double tmpMaxLoadWeight;

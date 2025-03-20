@@ -2,6 +2,10 @@
 
 public class GasCointaner : Container, IHazardNotifer
 {
+    public GasCointaner() : base("G")
+    {
+        
+    }
     public void NotifyHazard(string contenerName)
     {
         Console.WriteLine("Alert of dangerous action in GasContainer: " + contenerName); 

@@ -5,7 +5,12 @@ public class ColdCointaner : Container, IHazardNotifer
     
     private string typeOfProduct { get; set; }
     double temperature { get; set; }
-    
+
+    public ColdCointaner() : base("C")
+    {
+        
+    }
+
     public void NotifyHazard(string contenerName)
     {
         Console.WriteLine("Alert of dangerous action in ColdContainer: " + contenerName); 
