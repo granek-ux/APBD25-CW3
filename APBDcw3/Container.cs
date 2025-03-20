@@ -2,22 +2,22 @@
 
 public abstract class Container
 {
-    private int weightOfLoad { get; set; }
+    protected double weightOfLoad { get; set; }
 
-    private int height { get; set; }
+    protected double height { get; set; }
 
-    private int weightOfContener { get; set; }
+    protected double weightOfContener { get; set; }
 
-    private String serialNumber { get; set; }
-    
-    private int maxLoadWeight { get; set; }
+    protected String serialNumber { get; set; }
+
+    protected double maxLoadWeight { get; set; }
 
     public void emptyContener()
     {
         weightOfLoad = 0;
     }
 
-    public void LoadContener(int weight)
+    public virtual void LoadContener(int weight)
     {
         if (weight + weightOfLoad> maxLoadWeight)
             throw new OverfillException("too much weight");
