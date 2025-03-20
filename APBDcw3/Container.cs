@@ -2,7 +2,7 @@
 
 public abstract class Container
 {
-    protected double weightOfLoad { get; set; }
+    public double weightOfLoad { get; set; }
 
     protected double height { get; set; }
 
