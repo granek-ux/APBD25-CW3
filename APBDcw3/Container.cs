@@ -1,6 +1,6 @@
 ﻿namespace APBDcw3;
 
-public abstract class Contener
+public abstract class Container
 {
     private int weightOfLoad { get; set; }
 
