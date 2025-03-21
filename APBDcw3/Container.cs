@@ -8,7 +8,7 @@ public abstract class Container
 
     protected double weightOfContener { get; set; }
 
-    protected String serialNumber { get; set; }
+    public String serialNumber { get; set; }
 
     protected double maxLoadWeight { get; set; }
 
