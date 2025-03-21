@@ -13,9 +13,13 @@ public abstract class Container
     protected double maxLoadWeight { get; set; }
 
     private static int id = 0;
-
-    protected Container(String typeOfCointaner)
+    
+    protected Container(String typeOfCointaner, double weightOfLoad, double height, double weightOfContener, double maxLoadWeight)
     {
+        this.weightOfLoad = weightOfLoad;
+        this.height = height;
+        this.weightOfContener = weightOfContener;
+        this.maxLoadWeight = maxLoadWeight;
         this.serialNumber = $"KON-{typeOfCointaner}-{id++}";
     }
 

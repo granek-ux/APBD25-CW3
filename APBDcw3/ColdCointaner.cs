@@ -2,18 +2,19 @@
 
 public class ColdCointaner : Container, IHazardNotifer
 {
-    
-    private string typeOfProduct { get; set; }
-    double temperature { get; set; }
-
-    public ColdCointaner() : base("C")
+    public ColdCointaner( double weightOfLoad, double height, double weightOfContener, double maxLoadWeight, string typeOfProduct, double temperature) : base("C", weightOfLoad, height, weightOfContener, maxLoadWeight)
     {
-        
+        this.typeOfProduct = typeOfProduct;
+        this.temperature = temperature;
     }
 
-    public void NotifyHazard(string contenerName)
+    private string typeOfProduct { get; set; }
+    double temperature { get; set; }
+    
+
+    public void NotifyHazard()
     {
-        Console.WriteLine("Alert of dangerous action in ColdContainer: " + contenerName); 
+        Console.WriteLine("Alert of dangerous action in ColdContainer: " + serialNumber); 
     }
 
     public override void emptyContener()

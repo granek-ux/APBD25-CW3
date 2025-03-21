@@ -4,8 +4,9 @@ public class LiqudContainer : Container , IHazardNotifer
 {
     private TypeOfLoad typeOfLoad;
 
-    public LiqudContainer() : base("L")
+    public LiqudContainer(double weightOfLoad, double height, double weightOfContener, double maxLoadWeight, TypeOfLoad typeOfLoad) : base("L", weightOfLoad, height, weightOfContener, maxLoadWeight)
     {
+        this.typeOfLoad = typeOfLoad;
     }
 
     public override void LoadContener(int weight)
@@ -21,13 +22,13 @@ public class LiqudContainer : Container , IHazardNotifer
         }
 
         if (weight + weightOfLoad > tmpMaxLoadWeight)
-            NotifyHazard(serialNumber);
-        else
-            weightOfLoad += weight;
+            NotifyHazard();
+        
+        base.LoadContener(weight);
     }
 
-    public void NotifyHazard(string contenerName)
+    public void NotifyHazard()
     {
-        Console.WriteLine("Alert of dangerous action in LiqudContainer: " + contenerName);
+        Console.WriteLine("Alert of dangerous action in LiqudContainer: " + serialNumber);
     }
 }

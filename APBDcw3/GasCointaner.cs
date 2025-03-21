@@ -2,13 +2,13 @@
 
 public class GasCointaner : Container, IHazardNotifer
 {
-    public GasCointaner() : base("G")
+    public GasCointaner(double weightOfLoad, double height, double weightOfContener, double maxLoadWeight) : base("G", weightOfLoad, height, weightOfContener, maxLoadWeight)
     {
-        
     }
-    public void NotifyHazard(string contenerName)
+
+    public void NotifyHazard()
     {
-        Console.WriteLine("Alert of dangerous action in GasContainer: " + contenerName); 
+        Console.WriteLine("Alert of dangerous action in GasContainer: " + serialNumber); 
     }
     
     public override void emptyContener()
