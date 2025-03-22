@@ -4,13 +4,13 @@ public abstract class Container
 {
     public double weightOfLoad { get; set; }
 
-    protected double height { get; set; }
+    public double height { get; set; }
 
-    protected double weightOfContener { get; set; }
+    public double weightOfContener { get; set; }
 
     public String serialNumber { get; set; }
 
-    protected double maxLoadWeight { get; set; }
+    public double maxLoadWeight { get; set; }
 
     private static int id = 0;
     
@@ -33,5 +33,10 @@ public abstract class Container
         if (weight + weightOfLoad> maxLoadWeight)
             throw new OverfillException("too much weight");
         weightOfLoad += weight;
+    }
+
+    public override string ToString()
+    {
+        return $"Container: {serialNumber} + current height: {height} weight of load: {weightOfLoad} max load weight: {maxLoadWeight} weight of container {weightOfContener}";
     }
 }

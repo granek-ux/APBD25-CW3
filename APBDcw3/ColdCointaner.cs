@@ -2,20 +2,21 @@
 
 public class ColdCointaner : Container, IHazardNotifer
 {
-    private string typeOfProduct { get; set; }
-    double temperature { get; set; }
+    public Products typeOfProduct { get; set; }
+    public double temperature { get; set; }
     private Dictionary<Products, double> productDictionary;
-    public ColdCointaner( double weightOfLoad, double height, double weightOfContener, double maxLoadWeight, string typeOfProduct, double temperature) : base("C", weightOfLoad, height, weightOfContener, maxLoadWeight)
+
+    public ColdCointaner(double weightOfLoad, double height, double weightOfContener, double maxLoadWeight,
+        Products typeOfProduct, double temperature) : base("C", weightOfLoad, height, weightOfContener, maxLoadWeight)
     {
         this.typeOfProduct = typeOfProduct;
         this.temperature = temperature;
-        this.productDictionary = new Dictionary<Products, double>();
-        
+
         this.productDictionary = new Dictionary<Products, double>
         {
             { Products.Banana, 13.3 },
             { Products.Chocolate, 18 },
-            {Products.Fish, 2 },
+            { Products.Fish, 2 },
             { Products.Meat, -15 },
             { Products.Ice_Cream, -18 },
             { Products.Frozen_Pizza, -30 },
@@ -25,17 +26,36 @@ public class ColdCointaner : Container, IHazardNotifer
             { Products.Eggs, 19 }
         };
         
+        if(productDictionary[typeOfProduct] < temperature)
+            throw new LowTemperatureException("Low temperature");
     }
 
-    
 
     public void NotifyHazard()
     {
-        Console.WriteLine("Alert of dangerous action in ColdContainer: " + serialNumber); 
+        Console.WriteLine("Alert of dangerous action in ColdContainer: " + serialNumber);
     }
 
     public override void emptyContener()
     {
-        weightOfLoad = weightOfLoad* 0.05;
+        weightOfLoad = weightOfLoad * 0.05;
+    }
+    
+    public void LoadContener(double weight, Products product)
+    {
+        if (!product.Equals(this.typeOfProduct))
+        {
+            Console.WriteLine($"Wrong product type it shoudl be {product}");
+            return;
+        }
+        if(weight  + weightOfLoad > this.maxLoadWeight)
+            throw new OverfillException("Overfill");
+        
+        this.weightOfLoad += weight;
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + $" product {typeOfProduct} temperature {temperature}";
     }
 }

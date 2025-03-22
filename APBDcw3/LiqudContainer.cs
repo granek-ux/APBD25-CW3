@@ -2,7 +2,7 @@
 
 public class LiqudContainer : Container , IHazardNotifer
 {
-    private TypeOfLoad typeOfLoad;
+    public TypeOfLoad typeOfLoad;
 
     public LiqudContainer(double weightOfLoad, double height, double weightOfContener, double maxLoadWeight, TypeOfLoad typeOfLoad) : base("L", weightOfLoad, height, weightOfContener, maxLoadWeight)
     {
@@ -30,5 +30,10 @@ public class LiqudContainer : Container , IHazardNotifer
     public void NotifyHazard()
     {
         Console.WriteLine("Alert of dangerous action in LiqudContainer: " + serialNumber);
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + $" type of load {typeOfLoad} ";
     }
 }

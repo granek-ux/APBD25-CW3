@@ -22,10 +22,13 @@ public class ContainerShip
     public void addContainer(Container container)
     {
         if (container.weightOfLoad + currentWeightOfContainer < maxWeightOfContainers * 1000)
+        {
             this.containers.Add(container);
+            currentWeightOfContainer += container.weightOfLoad;
+        }
         else
         {
-            throw new OverfillException("Container is overlapping.");
+            throw new OverfillException("ContainerShip is overlapping.");
         }
     }
 
@@ -36,6 +39,7 @@ public class ContainerShip
             addContainer(con);
         }
     }
+    
 
     public void replaceContainer(String oldSerialNumber, Container container)
     {
@@ -50,10 +54,44 @@ public class ContainerShip
             }
             else
             {
-                throw new OverfillException("Container is overlapping.");
+                throw new OverfillException("Ship is overlapping.");
             }
         }
     }
+
+    private void calculateLoadWeight()
+    {
+        currentWeightOfContainer = 0;
+        foreach (Container c in containers)
+        {
+            currentWeightOfContainer += c.weightOfLoad;
+        }
+    }
+
+    public void unloadContainer(String serialNumber)
+    {
+        containers.Find( c => c.serialNumber.Equals(serialNumber))?.emptyContener();
+        calculateLoadWeight();
+        
+        Console.WriteLine($"Contoner {serialNumber} unloaded.");
+    }
+
+    private Container? takeOutContainer(string serialNumber)
+    {
+        Container? find = containers.Find( c => c.serialNumber.Equals(serialNumber));
+        removeContainer(serialNumber);
+        return find;
+    }
+
+    public static void moveContainer(String serialNumber, ContainerShip oldContainerShip,
+        ContainerShip newContainerShip)
+    {
+        Container? container = oldContainerShip.takeOutContainer(serialNumber);
+
+        if (container != null) newContainerShip.addContainer(container);
+        else Console.WriteLine("No such container");
+    }
+    
 
     public void removeContainer(String serialNumber)
     {
@@ -66,8 +104,23 @@ public class ContainerShip
         
     }
 
-    public override string ToString()
+    public string getInfoShpi()
     {
-        return base.ToString();
+        String info = $"ship: max speed {maxSpeed}kn, max number of containers {maxCointaners}, number of containers {containers.Count},max weight {maxWeightOfContainers}, current weight {currentWeightOfContainer} \n";
+        info += "Info about containers: \n";
+        foreach (Container c in containers)
+            info += c.ToString() + " \n";
+        
+        return info;
     }
+    
+    public string getInfoContainer(String serialNumber)
+    {
+        Container? find = containers.Find( c => c.serialNumber.Equals(serialNumber));
+        if (find != null)
+            return find.ToString();
+        
+        return "No such container on ship";
+    }
+
 }
