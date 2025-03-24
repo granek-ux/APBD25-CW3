@@ -35,11 +35,6 @@ public class ColdCointaner : Container, IHazardNotifer
     {
         Console.WriteLine("Alert of dangerous action in ColdContainer: " + serialNumber);
     }
-
-    public override void emptyContener()
-    {
-        weightOfLoad = weightOfLoad * 0.05;
-    }
     
     public void LoadContener(double weight, Products product)
     {
